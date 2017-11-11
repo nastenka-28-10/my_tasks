@@ -2,16 +2,10 @@ package tasks_java;
 
 public class second {
 
-	public static void main(String args[]){
-		String InputString="";
-		for (int i=0; i<args.length;i++){
-			InputString+=args[i]+" ";
-		}
-		InputString=InputString.trim();
-		
-		String Result=ROT13(InputString);
+	public static void main(String args[]){	
+		String Result=ROT13(args[0].trim().replaceAll("[^a-zA-Z]",""));
 		System.out.print("Your string: ");
-		System.out.println(InputString);
+		System.out.println(args[0].trim().replaceAll("[^a-zA-Z]",""));
 		System.out.print("Code string: ");
 		System.out.println(Result);
 		System.out.print("Decode string: ");
@@ -21,7 +15,7 @@ public class second {
 		return ROT13(InputString);		
 	}
 	public static String ROT13(String InputString){
-		char[]InputArr=InputString.toCharArray();
+		char[] InputArr= new char [InputString.length()];
 		for (int i = 0; i < InputString.length(); i++) {
             char c = InputString.charAt(i);           
             if       (c >= 'a' && c <= 'm') c += 13;
