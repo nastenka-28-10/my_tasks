@@ -1,5 +1,8 @@
 package tasks_java;
 import java.util.Scanner;
+import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
+import java.util.function.Supplier;
 import java.util.stream.*;
 
 public class fourth {
@@ -28,13 +31,31 @@ public class fourth {
 				
 	}
 	public static IntStream MakeIntStream(Scanner sc){
+		IntSupplier IntOnly = ()-> {
+            while(!sc.hasNextInt()&&sc.hasNext()){
+            	sc.next();
+            }
+            if(sc.hasNextInt()) {
+            	return sc.nextInt();
+            }else
+			return 0;
+        };
 		System.out.print("Enter int values: ");
-		IntStream stream =IntStream.generate(() -> sc.nextInt());		
+		IntStream stream =IntStream.generate(IntOnly);		
 		return stream;
 	}
 	public static DoubleStream MakeDoubleStream(Scanner sc){
+		DoubleSupplier DoubleOnly = ()->{
+            while(!sc.hasNextDouble()&&sc.hasNext()){
+            	sc.next();
+            }
+            if(sc.hasNextDouble()) {
+            	return sc.nextDouble();
+            } else
+			return 0;                    
+        };
 		System.out.print("Enter double values: ");
-		DoubleStream stream =DoubleStream.generate(() -> sc.nextDouble());		
+		DoubleStream stream =DoubleStream.generate(DoubleOnly);		
 		return stream;
 	}
 	public static Stream<String> MakeWordStream(Scanner sc){
